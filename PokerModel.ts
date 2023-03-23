@@ -45,18 +45,30 @@ export class PokerModel implements PokerStages {
     this.maxPrizeMult = config['maxPrizeMult'];
     this.minBet = config['minBet'];
 
-    return Promise.resolve({ hasError: 0 });
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve({ hasError: 0 });
+      }, 1000);
+    });
   }
   loadPrizesTables(prizes: Object): Promise<ResultStage> {
     //llenar prizes table
     this.betTypes = prizes['betTypes'];
-    return Promise.resolve({ hasError: 0 });
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve({ hasError: 0 });
+      }, 1000);
+    });
   }
   getBalance(balance: Object): Promise<Object> {
     this.balance = balance['balance'];
     this.bonusNonRestricted = balance['bonusNonRestricted'];
     this.bonusRestricted = balance['bonusRestricted'];
-    return Promise.resolve({ hasError: 0 });
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve({ hasError: 0 });
+      }, 1000);
+    });
   }
   betRequest(betRequest: Object): Promise<Object> {
     const cards = betRequest['cards'];
@@ -66,7 +78,11 @@ export class PokerModel implements PokerStages {
     this.carta4 = cards[3];
     this.carta5 = cards[4];
 
-    return Promise.resolve({ hasError: 0 });
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve({ hasError: 0 });
+      }, 1000);
+    });
   }
   drawRequest(drawRequest: Object): Promise<Object> {
     console.log('poker model draw', drawRequest);
@@ -79,7 +95,11 @@ export class PokerModel implements PokerStages {
 
     this.ganancia = drawRequest['win'];
 
-    return Promise.resolve({ hasError: 0 });
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve({ hasError: 0 });
+      }, 1000);
+    });
   }
   endGameRequest(endGameRequest: Object): Promise<Object> {
     this.carta1 = 0;
@@ -87,6 +107,10 @@ export class PokerModel implements PokerStages {
     this.carta3 = 0;
     this.carta4 = 0;
     this.carta5 = 0;
-    return Promise.resolve({ hasError: 0 });
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve({ hasError: 0 });
+      }, 1000);
+    });
   }
 }

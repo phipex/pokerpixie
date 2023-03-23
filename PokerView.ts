@@ -9,7 +9,7 @@ export abstract class PokerView implements PokerStages {
 
     document.getElementById('betButton').addEventListener('click', (_) => {
       const apuestaRequest = { amount: 1, currency: 'COP', deno: 100 }; // esto se llena dependiendo de la vista
-
+      document.querySelector('#cargando').hidden = false;
       this.paintSpan(apuestaRequest.deno * apuestaRequest.deno, 'Apuesta');
       this.onBet(apuestaRequest);
       //this.onBet({ cards: [2, 22, 14, 34, 3], idPlaysession: 180812, gain: 0 });
@@ -17,6 +17,7 @@ export abstract class PokerView implements PokerStages {
 
     document.getElementById('drawButton').addEventListener('click', (_) => {
       const drawRequest = { heldCards: [14] };
+      document.querySelector('#cargando').hidden = false;
       this.onDraw({ drawRequest });
     });
   }
@@ -51,6 +52,7 @@ export abstract class PokerView implements PokerStages {
     return Promise.resolve({ hasError: 0 });
   }
   betRequest(betRequest: Object): Promise<ResultStage> {
+    document.querySelector('#cargando').hidden = true;
     //llenar
     this.paintMessage('betRequest');
     this.paintSpan(this.pokerModel.carta1, 'Carta1');
@@ -65,7 +67,7 @@ export abstract class PokerView implements PokerStages {
   drawRequest(drawRequest: Object): Promise<ResultStage> {
     //llenar
     this.paintMessage('drawRequest');
-
+    document.querySelector('#cargando').hidden = true;
     this.paintSpan(this.pokerModel.carta1, 'Carta1');
     this.paintSpan(this.pokerModel.carta2, 'Carta2');
     this.paintSpan(this.pokerModel.carta3, 'Carta3');
@@ -78,7 +80,7 @@ export abstract class PokerView implements PokerStages {
   endGameRequest(endGameRequest: Object): Promise<ResultStage> {
     //llenar
     this.paintMessage('view endGameRequest');
-
+    document.querySelector('#cargando').hidden = true;
     this.paintSpan(this.pokerModel.carta1, 'Carta1');
     this.paintSpan(this.pokerModel.carta2, 'Carta2');
     this.paintSpan(this.pokerModel.carta3, 'Carta3');
